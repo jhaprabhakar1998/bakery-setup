@@ -1,0 +1,790 @@
+{
+	"info": {
+		"_postman_id": "1de2ee33-d03b-4f0c-8d43-5c10bb30324b",
+		"name": "Bakery Node Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19883753"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/health",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/items",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"items"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "12435454",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Items By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/items/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"items",
+						":id"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "12435454",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders?size=1",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Date",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/?date=1690051021000",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						""
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "1690051021000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Date Range",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/?startDate=1690234554766",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						""
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "1690234554766"
+						},
+						{
+							"key": "endDate",
+							"value": "1690194422981",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Item Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/items/:itemType",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"items",
+						":itemType"
+					],
+					"variable": [
+						{
+							"key": "itemType",
+							"value": "cake"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Branch Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/branch/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"branch",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Value By Date",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/value?date=1690051021000",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"value"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "1690051021000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Value By Item Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/value?itemType=muffins",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"value"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "1690051021000",
+							"disabled": true
+						},
+						{
+							"key": "itemType",
+							"value": "muffins"
+						},
+						{
+							"key": "itemType",
+							"value": "cake",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Value By Branch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/value?branchId=5",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"value"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "1690051021000",
+							"disabled": true
+						},
+						{
+							"key": "itemType",
+							"value": "cake",
+							"disabled": true
+						},
+						{
+							"key": "branchId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Value By Datetime Range",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/value?date=1690051021000&itemType=muffins",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"value"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "1690051021000"
+						},
+						{
+							"key": "itemType",
+							"value": "muffins"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Top Branches",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/value/topBranch?size=100",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"value",
+						"topBranch"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Orders",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemType\": [\"muffins\"],\n    \"branchId\": 111,\n    \"customerId\": 8,\n    \"orderDetails\": {\n        \"muffins\": 1\n    },\n    \"orderState\": \"shipped\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Items",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemType\": \"Cake\",\n    \"price\": 150\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/items/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Orders",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"prabhakar\",\n    \"age\": 20,\n    \"class\": 8,\n    \"section\": \"A\",\n    \"email\": \"kdahf\",\n    \"address\": \"kdafkj\",\n    \"phone\": \"1234356789334\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/students/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6442c5892f44f6475bb6bafb"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Orders",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"prabhakar\",\n    \"age\": 20,\n    \"class\": 8,\n    \"section\": \"A\",\n    \"email\": \"kdahf\",\n    \"address\": \"kdafkj\",\n    \"phone\": \"1234356789334\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Items",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"prabhakar\",\n    \"age\": 20,\n    \"class\": 8,\n    \"section\": \"A\",\n    \"email\": \"kdahf\",\n    \"address\": \"kdafkj\",\n    \"phone\": \"1234356789334\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/items/:id",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemType\": [\"muffins\"],\n    \"branchId\": 1,\n    \"customerId\": 11,\n    \"orderDetails\": {\n        \"muffins\": 6\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/orders",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemType\": \"muffins\",\n    \"price\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{NODE_SERVICE_BASE_URL}}/api/v1/items",
+					"host": [
+						"{{NODE_SERVICE_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"items"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,119 @@
+def pipelineTimeout = '5'
+def compileScriptPath = './test.sh'
+def remoteHost = "${params.remoteHost}"
+def gitRepo = "${params.gitRepo}"
+def gitBranch = "${params.gitBranch}"
+def gitCommit = "${params.gitCommit}"
+def gitTag = "${params.gitTag}"
+def dockerImage = "${params.dockerImage}"
+def containerName = "${params.containerName}"
+def containerPort = "${params.containerPort}" /* Same for docker container and host mapping to it */
+def productionVolumeConfigPath = "${params.productionVolumeConfigPath}"
+def gitBaseRepoUrl = "https://github.com/jhaprabhakar1998/"
+def githubToken = "${params.githubAccessToken}"
+def jenkinsScriptsDir = "Pipeline-Workspace"
+def baseRepo = "Pipeline-Workspace"
+
+pipeline {
+    options {
+        timeout(time: "${pipelineTimeout}", unit: 'MINUTES')
+    }
+    environment {
+        AWS_SECRET_ACCESS_KEY = ""
+    }
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                /* This script is just to show how to clone a repo in jenkins workspace */
+                script {
+                    sh "rm -rf Pipeline-Workspace && mkdir Pipeline-Workspace"
+                    dir ("Pipeline-Workspace"){ //To go to another directory in jenkins pipeline you need to use dir, cd command doesn't work.
+                        withCredentials([gitUsernamePassword(credentialsId: 'github-token', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
+                            // sh 'git clone https://github.com/jhaprabhakar1998/bakery-backend.git'
+                        }
+                    }
+                }
+                
+                script {
+                    def remote = [: ]
+                    remote.name = "node-1"
+                    remote.host = "${remoteHost}"
+                    remote.allowAnyHosts = true
+                    
+                    withCredentials([
+                        sshUserPrivateKey(credentialsId: 'ec2-token', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')
+                    ]) {
+                        remote.user = userName
+                        remote.identityFile = identity
+                        
+                        /* Using single sshCommand as with multiple commands we have to change directory. By default ssh is in home directory. */
+                        // sshCommand remote: remote, command: """ 
+                        //     cd ${baseRepo} && 
+                        //     rm -rf ${gitRepo} &&
+                        //     git clone -b ${gitBranch} git@github.com:jhaprabhakar1998/${gitRepo}.git
+                        // """
+                         
+                        // if(gitTag){
+                        //     println "git Tag is present - ${gitTag}"   
+                        //     sshCommand remote: remote, command: """
+                        //         cd ${baseRepo}/${gitRepo} && 
+                        //         git checkout ${gitTag}
+                        //     """
+                        //     sshCommand remote: remote, command: "git checkout ${gitTag}"
+                        // } else if(gitCommit){
+                        //     println "git Commit is present - ${gitCommit}"
+                        //     sshCommand remote: remote, command: """
+                        //         cd ${baseRepo}/${gitRepo} &&
+                        //         git checkout ${gitCommit}
+                        //     """
+                        // }
+                    }
+                }
+            }
+        }
+        stage('Deploy Dokcer Image') {
+            steps {
+                script {
+                    def remote = [: ]
+                    remote.name = "node-1"
+                    remote.host = "${remoteHost}"
+                    remote.allowAnyHosts = true
+                    
+                    withCredentials([
+                        sshUserPrivateKey(credentialsId: 'ec2-token', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')
+                    ]) {
+                        remote.user = userName
+                        remote.identityFile = identity
+                        
+                        
+                        /* Ideally these step should be followed for smooth tag/commit based deployment. But due to resource constraing npm commands
+                        mostly stuck in ec2 micro instance as resource is very limited */
+                        // sshCommand remote: remote, command: """
+                        //     cd ${baseRepo}/${gitRepo} &&
+                        //     pwd &&
+                        //     git rev-parse HEAD &&
+                        //     sudo docker ps -a && 
+                        //     sudo docker build -f dev.Dockerfile -t ${dockerImage} .&&
+                        //     sudo docker images &&
+                        //     sudo docker rm ${dockerImage} &&
+                        //     sudo docker run -v /home/ec2-user/Prod-Configs/.env.production:/usr/src/app/.env.production -dp 8282:8282 ${dockerImage} && 
+                        //     ls -a
+                        // """
+                        
+                        /* So now image is pushed from local and creds are there in ec2 instance in docker and we pull and run the image */
+                        sshCommand remote: remote, command: """
+                            cd ${baseRepo}/${gitRepo} &&
+                            sudo docker ps -a &&
+                            git rev-parse HEAD &&
+                            sudo docker rm ${containerName} -f &&
+                            sudo docker run --name ${containerName} -v ${productionVolumeConfigPath}:/usr/src/app/.env.production -dp ${containerPort}:${containerPort} ${dockerImage} &&
+                            sleep 30s &&
+                            curl localhost:${containerPort}/health
+                        """
+                    }
+                }
+            }
+        }
+    }
+}
